@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.029087227, g: 0.02989756, b: 0.02989664, a: 1}
+  m_IndirectSpecularColor: {r: 0.07797485, g: 0.09178493, b: 0.11758991, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -333,7 +333,11 @@ MonoBehaviour:
   gravityFactor: 4
   laneOffset: 3
   environmentSpeed: 12
-  spawnRate: 1
+  obstacleSpawnRate: 1
+  coinsRowSpawnRate: 2
+  coinsInRow: 5
+  coinsInRowSpawnRate: 0.5
+  score: 0
 --- !u!4 &1047655876
 Transform:
   m_ObjectHideFlags: 0
@@ -360,7 +364,7 @@ GameObject:
   - component: {fileID: 1052914080}
   - component: {fileID: 1052914079}
   m_Layer: 0
-  m_Name: ObstacleSpawner
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -378,7 +382,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52fc42c8b7536374fb15d2c552aab139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 1062015658370612, guid: e18a33b201b7d4b41a22a039bc5602bb, type: 3}
+  coinPrefab: {fileID: 1498403948531744, guid: 596a5f344d4a0fb4ba890cba5da37b76, type: 3}
+  obstacles:
+  - {fileID: 5594698195351130863, guid: 1d26af622ed3c9041b22bfb30999689a, type: 3}
 --- !u!4 &1052914080
 Transform:
   m_ObjectHideFlags: 0
@@ -1001,6 +1007,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6231860512717523996, guid: e7571f21efbb0e241b9473df347a9700, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231860512717523996, guid: e7571f21efbb0e241b9473df347a9700, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6538502972603259096, guid: e7571f21efbb0e241b9473df347a9700, type: 3}

@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public enum CollectibleType {
+    Coin,
+    Magnet,
+    Jetpack,
+    JumpBoots,
+}
+
+public class Collectable : MonoBehaviour
 {
     public GameManager gm;
+    
 
     void Update()
     {
@@ -12,5 +20,12 @@ public class Obstacle : MonoBehaviour
             Destroy(gameObject);
         }
         transform.Translate(Vector3.back * gm.environmentSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag == "Player") {
+            gm.score += 1;
+            Destroy(gameObject);
+        }
     }
 }
