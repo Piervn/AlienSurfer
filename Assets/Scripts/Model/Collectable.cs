@@ -26,8 +26,6 @@ public class Collectable : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
             EventManager.CollectCoin();
-            /*am.Play("Coin");
-            gm.score += 1;*/
             Destroy(gameObject);
         }
     }
