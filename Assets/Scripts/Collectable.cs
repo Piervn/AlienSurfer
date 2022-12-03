@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CollectibleType {
+public enum CollectableType {
     Coin,
     Magnet,
     Jetpack,
@@ -12,6 +12,7 @@ public enum CollectibleType {
 public class Collectable : MonoBehaviour
 {
     public GameManager gm;
+    public AudioManager am;
     
 
     void Update()
@@ -24,7 +25,9 @@ public class Collectable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
-            gm.score += 1;
+            EventManager.CollectCoin();
+            /*am.Play("Coin");
+            gm.score += 1;*/
             Destroy(gameObject);
         }
     }

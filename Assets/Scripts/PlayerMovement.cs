@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour {
     BoxCollider coll;
     Vector3 collCenter;
     Vector3 collSize;
-    const float distToGround = 0.5f;
+    const float distToGround = 0.6f;
 
     bool IsFalling {
         get {
@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Awake() {
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = FindObjectOfType<GameManager>();
     }
 
     void Start() {
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour {
             state = State.Run;
             anim.SetBool("IsJumping", false);
         }
-        anim.SetFloat("RunSpeed", gm.environmentSpeed / 10f);
+        anim.SetFloat("RunSpeed", gm.environmentSpeed / 6f);
     }
 
     bool IsGrounded() {

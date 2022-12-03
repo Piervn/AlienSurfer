@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
+  - LeftTrack
+  - RightTrack
+  - Environment
   layers:
   - Default
   - TransparentFX

@@ -6,9 +6,9 @@ public class Obstacle : MonoBehaviour
 {
     public GameManager gm;
 
-    void Update()
+    void FixedUpdate()
     {
-        if (transform.position.z < -10) {
+        if (transform.position.z < -100) {
             Destroy(gameObject);
         }
         transform.Translate(Vector3.back * gm.environmentSpeed * Time.deltaTime);
