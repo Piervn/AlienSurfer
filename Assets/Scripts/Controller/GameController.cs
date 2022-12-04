@@ -19,10 +19,12 @@ public class GameController : MonoBehaviour
         };
 
         EventManager.OnLeftPress += () => {
+            playerAnim.MoveLeftAnimation();
             player.MoveLeft();
         };
 
         EventManager.OnRightPress += () => {
+            playerAnim.MoveRightAnimation();
             player.MoveRight();
         };
 

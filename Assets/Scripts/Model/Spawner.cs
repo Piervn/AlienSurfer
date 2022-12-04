@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour {
     }
 
     void Start() {
-        StartCoroutine(SpawnCoins());
+        //StartCoroutine(SpawnCoins());
         //StartCoroutine(SpawnTrains());
     }
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public enum State {
     Run,
     Jump,
+    Sideways,
     Slide,
     Fall,
 }
@@ -19,10 +20,11 @@ public enum Lane {
 public class PlayerMovement : MonoBehaviour {
     [SerializeField] private LayerMask groundLayer;
     public State state = State.Run;
+    public Lane lane = Lane.Middle;
     public float jumpVelocity;
+    public float sideMovemnentVelocity;
 
     GameManager gm;
-    Lane lane = Lane.Middle;
     Rigidbody rb;
     BoxCollider coll;
     Vector3 collCenter;
@@ -72,16 +74,39 @@ public class PlayerMovement : MonoBehaviour {
 
     public void MoveRight() {
         if (state == State.Run && lane != Lane.Right) {
-            transform.position += Vector3.right * gm.laneOffset;
-            lane = (lane == Lane.Middle) ? Lane.Right : Lane.Middle;
+            StartCoroutine(MoveToLane(lane + 1));
         }
     }
 
+
     public void MoveLeft() {
         if (state == State.Run && lane != Lane.Left) {
-            transform.position += Vector3.left * gm.laneOffset;
-            lane = (lane == Lane.Middle) ? Lane.Left : Lane.Middle;
+            StartCoroutine(MoveToLane(lane - 1));
         }
+    }
+
+    IEnumerator MoveToLane(Lane targetLane) {
+        float targetX = 0f;
+        switch (targetLane) {
+            case Lane.Left:
+                targetX = -gm.laneOffset;
+                break;
+            case Lane.Middle:
+                targetX = 0f;
+                break;
+            case Lane.Right:
+                targetX = gm.laneOffset;
+                break;
+        }
+        state = State.Sideways;
+        while (Mathf.Abs(transform.position.x - targetX) > 0.01f) {
+            transform.position = Vector3.MoveTowards(transform.position, 
+                                                     new Vector3(targetX, transform.position.y, transform.position.z), 
+                                                     sideMovemnentVelocity * Time.deltaTime);
+            yield return null;
+        }
+        state = State.Run;
+        lane = targetLane;
     }
 
     public void Slide() {
@@ -93,6 +118,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void EndSliding() {
+        state = State.Run;
         coll.size = collSize;
         coll.center = collCenter;
     }

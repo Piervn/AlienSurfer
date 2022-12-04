@@ -8,7 +8,9 @@ public class PlayerAnimationController : MonoBehaviour
     PlayerMovement pm;
 	Animator anim;
 
-    const float animSpeedFactor = 3.8f;
+    const float animJumpSpeedFactor = 3.8f;
+    const float animRunSpeedFactor = 6f;
+    const float animSideSpeedFactor = 10f;
 
 
     void Start()
@@ -20,26 +22,33 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Update()
     {
-        anim.SetFloat("RunSpeed", gm.environmentSpeed / 6f);
+        anim.SetFloat("RunSpeed", gm.environmentSpeed / animRunSpeedFactor);
     }
 
     public void JumpAnimation() {
         if (pm.state == State.Jump && pm.IsGrounded()) {
-            anim.SetFloat("JumpSpeed", gm.gravityFactor * animSpeedFactor / pm.jumpVelocity);
-            anim.SetTrigger("Jump");
+            anim.SetFloat("JumpSpeed", gm.gravityFactor * animJumpSpeedFactor / pm.jumpVelocity);
             anim.Play("Jumping");
         }
     }
 
-    public  void SlideAnimation() {
-        if (pm.state == State.Slide) {
-            anim.SetBool("IsSliding", true);
-            anim.Play("Sliding");
+    public void MoveLeftAnimation() {
+        if (pm.state == State.Run) {
+            anim.SetFloat("SideSpeed", pm.sideMovemnentVelocity / animSideSpeedFactor);
+            anim.Play("RunningLeft");
         }
     }
 
-    public void EndSlideAnimation() {
-        pm.state = State.Run;
-        anim.SetBool("IsSliding", false);
+    public void MoveRightAnimation() {
+        if (pm.state == State.Run) {
+            anim.SetFloat("SideSpeed", pm.sideMovemnentVelocity / animSideSpeedFactor);
+            anim.Play("RunningRight");
+        }
+    }
+
+    public  void SlideAnimation() {
+        if (pm.state == State.Slide && pm.lane != Lane.Left) {
+            anim.Play("Sliding");
+        }
     }
 }
