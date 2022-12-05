@@ -20,9 +20,12 @@ public enum Lane {
 public class PlayerMovement : MonoBehaviour {
     [SerializeField] private LayerMask groundLayer;
     public State state = State.Run;
-    public Lane lane = Lane.Middle;
     public float jumpVelocity;
-    public float sideMovemnentVelocity;
+    public float sideMovementVelocity;
+    public float rollDownVelocity;
+
+    [HideInInspector]
+    public Lane lane = Lane.Middle;
 
     GameManager gm;
     Rigidbody rb;
@@ -33,15 +36,13 @@ public class PlayerMovement : MonoBehaviour {
 
     bool IsFalling {
         get {
-            return rb.velocity.y < 0f;
+            return rb.velocity.y < -0.1f;
         }
     }
-
-    void Awake() {
-        gm = FindObjectOfType<GameManager>();
-    }
+    bool IsRolling { get; set; } = false;
 
     void Start() {
+        gm = FindObjectOfType<GameManager>();
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<BoxCollider>();
         collCenter = coll.center;
@@ -49,7 +50,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Update() {
-        Land();
+        if (IsFalling && !IsGrounded()) {
+            EventManager.PlayerFalls();
+        }
+        if (IsFalling && IsGrounded()) {
+            EventManager.PlayerLands();
+        }
     }
 
     public bool IsGrounded() {
@@ -66,21 +72,27 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    public void Fall() {
+        state = State.Fall;
+    }
+    
     public void Land() {
-        if (state == State.Jump && IsGrounded() && IsFalling) {
+        if (state == State.Fall && IsGrounded()) {
             state = State.Run;
+        }
+        if (IsRolling && IsGrounded()) {
+            state = State.Slide;
         }
     }
 
     public void MoveRight() {
-        if (state == State.Run && lane != Lane.Right) {
+        if ((state == State.Run || state == State.Jump || state == State.Fall) && lane != Lane.Right) {
             StartCoroutine(MoveToLane(lane + 1));
         }
     }
 
-
     public void MoveLeft() {
-        if (state == State.Run && lane != Lane.Left) {
+        if ((state == State.Run || state == State.Jump || state == State.Fall) && lane != Lane.Left) {
             StartCoroutine(MoveToLane(lane - 1));
         }
     }
@@ -102,7 +114,7 @@ public class PlayerMovement : MonoBehaviour {
         while (Mathf.Abs(transform.position.x - targetX) > 0.01f) {
             transform.position = Vector3.MoveTowards(transform.position, 
                                                      new Vector3(targetX, transform.position.y, transform.position.z), 
-                                                     sideMovemnentVelocity * Time.deltaTime);
+                                                     sideMovementVelocity * Time.deltaTime);
             yield return null;
         }
         state = State.Run;
@@ -117,8 +129,24 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    public void RollDown() {
+        if (state == State.Jump || state == State.Fall) {
+            rb.AddForce(Vector3.down * rollDownVelocity);
+            IsRolling = true;
+            coll.size = new Vector3(1f, 0.5f, 1f);
+            coll.center = new Vector3(0f, 0.25f, 0f);
+        }
+    }
+
+
+    // Handlers for the animation events
     public void EndSliding() {
+        Debug.Log("TUTAJ DEBUGUJ Z RANA");
         state = State.Run;
+        IsRolling = false;
+    }
+
+    public void StandUp() {
         coll.size = collSize;
         coll.center = collCenter;
     }

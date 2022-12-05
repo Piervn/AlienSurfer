@@ -5,32 +5,44 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     PlayerMovement player;
-    PlayerAnimationController playerAnim;
+    PlayerAnimations playerAnim;
 
     void Awake() {
         player = FindObjectOfType<PlayerMovement>();
-        playerAnim = FindObjectOfType<PlayerAnimationController>();
+        playerAnim = FindObjectOfType<PlayerAnimations>();
     }
 
     void Start() {
         EventManager.OnSpacePress += () => {
-            player.Jump();
             playerAnim.JumpAnimation();
+            player.Jump();
         };
 
         EventManager.OnLeftPress += () => {
-            playerAnim.MoveLeftAnimation();
+            playerAnim.MoveSidewaysAnimation(false);
             player.MoveLeft();
         };
 
         EventManager.OnRightPress += () => {
-            playerAnim.MoveRightAnimation();
+            playerAnim.MoveSidewaysAnimation(true);
             player.MoveRight();
         };
 
         EventManager.OnDownPress += () => {
-            player.Slide();
             playerAnim.SlideAnimation();
+            player.Slide();
+            playerAnim.RollDownAnimation();
+            player.RollDown();
+        };
+
+        EventManager.OnPlayerLands += () => {
+            playerAnim.LandAnimation();
+            player.Land();
+        };
+
+        EventManager.OnPlayerFalls += () => {
+            playerAnim.FallAnimation();
+            player.Fall();
         };
 
     }

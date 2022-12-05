@@ -215,6 +215,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 898546401905645889}
     m_Modifications:
+    - target: {fileID: -9159281685594106368, guid: a2b62fd839ba62948abcdbf58d63e103, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -9116961607999293195, guid: a2b62fd839ba62948abcdbf58d63e103, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2b62fd839ba62948abcdbf58d63e103, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -275,9 +283,25 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5829349709905233913, guid: a2b62fd839ba62948abcdbf58d63e103, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4977988868804513432, guid: a2b62fd839ba62948abcdbf58d63e103, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3966382381303944049, guid: a2b62fd839ba62948abcdbf58d63e103, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a2b62fd839ba62948abcdbf58d63e103, type: 3}
       propertyPath: m_Name
       value: HighSpeed_Wagon
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a2b62fd839ba62948abcdbf58d63e103, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2b62fd839ba62948abcdbf58d63e103, type: 3}

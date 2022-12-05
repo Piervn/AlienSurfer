@@ -6,7 +6,7 @@ public class Obstacle : MonoBehaviour
 {
     public GameManager gm;
 
-    void FixedUpdate()
+    void Update()
     {
         if (transform.position.z < -100) {
             Destroy(gameObject);

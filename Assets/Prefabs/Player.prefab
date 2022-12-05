@@ -1374,8 +1374,8 @@ GameObject:
   - component: {fileID: 6717071233654953638}
   - component: {fileID: 6538502972603259098}
   - component: {fileID: 6538502972603259096}
+  - component: {fileID: 8802484375972402877}
   - component: {fileID: 1075551053953507016}
-  - component: {fileID: 5098280441742164809}
   - component: {fileID: 6213688590431509813}
   m_Layer: 0
   m_Name: Player
@@ -1430,6 +1430,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.82, z: 1}
   m_Center: {x: 0, y: 0.89, z: 0}
+--- !u!114 &8802484375972402877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6231860512717523996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38fa7c8c307dc7a4cad671cc3b052fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1075551053953507016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,18 +1461,8 @@ MonoBehaviour:
   lane: 1
   jumpVelocity: 0
   sideMovemnentVelocity: 0
---- !u!114 &5098280441742164809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6231860512717523996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38fa7c8c307dc7a4cad671cc3b052fe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  airSlideVelocity: 0
+  landVariation: 0
 --- !u!95 &6213688590431509813
 Animator:
   serializedVersion: 4

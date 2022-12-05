@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour {
 
     void Start() {
         //StartCoroutine(SpawnCoins());
-        //StartCoroutine(SpawnTrains());
+        StartCoroutine(SpawnTrains());
     }
 
     void Update() {
@@ -54,7 +54,7 @@ public class Spawner : MonoBehaviour {
         while (true) {
             Vector3 lane = Random.Range(-1, 2) * Vector3.right * gameManager.laneOffset;
             GameObject obj = Instantiate(obstacles[Random.Range(0, obstacles.Count)], transform);
-            obj.transform.position += lane;
+            //obj.transform.position += lane;
             Rigidbody objRb = obj.AddComponent<Rigidbody>();
             objRb.useGravity = false;
             objRb.isKinematic = true;

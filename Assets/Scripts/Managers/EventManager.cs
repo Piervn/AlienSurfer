@@ -11,18 +11,13 @@ public class EventManager {
     public static event KeyAction OnRightPress;
     public static event KeyAction OnDownPress;
 
+    public delegate void PlayerAction();
+    public static event PlayerAction OnPlayerLands;
+    public static event PlayerAction OnPlayerFalls;
+
     public static EventManager Instance {
         get; private set;
     }
-
-    /* void Awake() {
-        if (Instance == null) {
-            Instance = this;
-        }
-        else {
-            Destroy(gameObject);
-        }
-    } */
 
     public static void CollectCoin() {
         OnCoinCollect?.Invoke();
@@ -44,5 +39,12 @@ public class EventManager {
         OnDownPress?.Invoke();
     }
 
+    public static void PlayerLands() {
+        OnPlayerLands?.Invoke();
+    }
+
+    public static void PlayerFalls() {
+        OnPlayerFalls?.Invoke();
+    }
     
 }
