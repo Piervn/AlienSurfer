@@ -15,9 +15,13 @@ public class EventManager {
     public static event PlayerAction OnPlayerLands;
     public static event PlayerAction OnPlayerFalls;
 
+    public delegate void GameAction();
+    public static event GameAction OnGameOver;
+
     public static EventManager Instance {
         get; private set;
     }
+
 
     public static void CollectCoin() {
         OnCoinCollect?.Invoke();
@@ -45,6 +49,28 @@ public class EventManager {
 
     public static void PlayerFalls() {
         OnPlayerFalls?.Invoke();
+    }
+
+    public static void GameOver() {
+        OnGameOver?.Invoke();
+    }
+
+    public static void ClearEvents() {
+        OnCoinCollect = null;
+        OnSpacePress = null;
+        OnLeftPress = null;
+        OnRightPress = null;
+        OnDownPress = null;
+        OnPlayerLands = null;
+        OnPlayerFalls = null;
+        OnGameOver = null;
+    }
+
+    public static void ClearInputEvents() {
+        OnSpacePress = null;
+        OnLeftPress = null;
+        OnRightPress = null;
+        OnDownPress = null;
     }
     
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    public GameManager gm;
+    public float velocity = 10f;
 
     void Update()
     {
         if (transform.position.z < -100) {
             Destroy(gameObject);
         }
-        transform.Translate(Vector3.back * gm.environmentSpeed * Time.deltaTime);
+        transform.Translate(Vector3.back * velocity * Time.deltaTime);
     }
 }

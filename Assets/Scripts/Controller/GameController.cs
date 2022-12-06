@@ -62,4 +62,8 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void OnDestroy() {
+        EventManager.ClearEvents();
+    }
+
 }

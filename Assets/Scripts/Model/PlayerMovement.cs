@@ -18,7 +18,8 @@ public enum Lane {
 }
 
 public class PlayerMovement : MonoBehaviour {
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] 
+    private LayerMask groundLayer;
     public State state = State.Run;
     public float jumpVelocity;
     public float sideMovementVelocity;
@@ -27,12 +28,13 @@ public class PlayerMovement : MonoBehaviour {
     [HideInInspector]
     public Lane lane = Lane.Middle;
 
-    GameManager gm;
     Rigidbody rb;
+    GameManager gm;
     BoxCollider coll;
     Vector3 collCenter;
     Vector3 collSize;
     const float distToGround = 0.6f;
+    bool interrupted = false;
 
     bool IsFalling {
         get {
@@ -55,6 +57,14 @@ public class PlayerMovement : MonoBehaviour {
         }
         if (IsFalling && IsGrounded()) {
             EventManager.PlayerLands();
+        }
+    }
+
+    void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.CompareTag("Obstacle") && (rb.constraints & RigidbodyConstraints.FreezePositionZ) == 0) {
+            gm.environmentSpeed = 0;
+            interrupted = true;
+            EventManager.GameOver();
         }
     }
 
@@ -111,7 +121,7 @@ public class PlayerMovement : MonoBehaviour {
                 break;
         }
         state = State.Sideways;
-        while (Mathf.Abs(transform.position.x - targetX) > 0.01f) {
+        while (Mathf.Abs(transform.position.x - targetX) > 0.01f && !interrupted) {
             transform.position = Vector3.MoveTowards(transform.position, 
                                                      new Vector3(targetX, transform.position.y, transform.position.z), 
                                                      sideMovementVelocity * Time.deltaTime);
@@ -138,18 +148,14 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-
-    // Handlers for the animation events
+    // Handler for the animation event
     public void EndSliding() {
-        Debug.Log("TUTAJ DEBUGUJ Z RANA");
         state = State.Run;
         IsRolling = false;
-    }
-
-    public void StandUp() {
         coll.size = collSize;
         coll.center = collCenter;
     }
+
 
 }
 

@@ -13,7 +13,6 @@ public class PlayerAnimations : MonoBehaviour
     const float animRunSpeedFactor = 6f;
     const float animSideSpeedFactor = 10f;
 
-
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
@@ -63,7 +62,7 @@ public class PlayerAnimations : MonoBehaviour
 
     public  void SlideAnimation() {
         if (pm.state == State.Run) {
-            anim.Play("Sliding");
+            anim.SetBool("Sliding", true);
         }
     }
 
@@ -78,5 +77,9 @@ public class PlayerAnimations : MonoBehaviour
     public void EndRollDownAnimation() {
         anim.SetBool("Rolling", false);
         landVariation = 0;
+    }
+
+    public void EndSlideAnimation() {
+        anim.SetBool("Sliding", false);
     }
 }
