@@ -55,7 +55,7 @@ public class Spawner : MonoBehaviour {
             objRb.isKinematic = true;
 
             Obstacle obst = obj.AddComponent<Obstacle>();
-            obst.velocity = gameManager.environmentSpeed;
+            obst.gm = gameManager;
             yield return new WaitForSeconds(obstacleSpawnRate);
         }
     }

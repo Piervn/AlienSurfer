@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.12941177, g: 0.13725491, b: 0.14509805, a: 1}
   m_FogMode: 2
-  m_FogDensity: 0.01
+  m_FogDensity: 0.03
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -1326,7 +1326,7 @@ MonoBehaviour:
   sounds:
   - name: CoinCollected
     clip: {fileID: 8300000, guid: fff52766fd2d2d54491f789a835dad39, type: 3}
-    volume: 0.248
+    volume: 0
     pitch: 1
     source: {fileID: 0}
 --- !u!4 &416441332
@@ -3013,12 +3013,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 2363657900234252742, guid: 596a5f344d4a0fb4ba890cba5da37b76, type: 3}
   obstacles:
+  - {fileID: 5594698195351130863, guid: 1d26af622ed3c9041b22bfb30999689a, type: 3}
+  - {fileID: 5594698195351130863, guid: 9fa28f7a677edc4488eb4dee00393e24, type: 3}
+  - {fileID: 5594698195351130863, guid: a818a78f407af7f478ec7757be916c7d, type: 3}
   - {fileID: 7816195104364904050, guid: 6156c99a0f1b6b74dad0c24306aa8b04, type: 3}
   - {fileID: 7816195104364904050, guid: 2716aa23b2a974342b175048b2c3234d, type: 3}
+  - {fileID: 144392, guid: 379dd1772cbea90429d6838f15fab942, type: 3}
   coinsRowSpawnRate: 2
   coinsInRow: 5
   coinsInRowSpawnRate: 2
-  obstacleSpawnRate: 5
+  obstacleSpawnRate: 2
 --- !u!4 &1052914080
 Transform:
   m_ObjectHideFlags: 0
@@ -3027,7 +3031,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052914078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 30}
+  m_LocalPosition: {x: 0, y: 0.3, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

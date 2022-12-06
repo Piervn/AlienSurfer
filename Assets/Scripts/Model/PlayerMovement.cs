@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
     BoxCollider coll;
     Vector3 collCenter;
     Vector3 collSize;
-    const float distToGround = 0.6f;
+    const float distToGround = 0.7f;
     bool interrupted = false;
 
     bool IsFalling {
