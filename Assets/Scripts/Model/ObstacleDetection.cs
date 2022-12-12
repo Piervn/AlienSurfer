@@ -9,7 +9,7 @@ public class ObstacleDetection : MonoBehaviour
     BoxCollider coll;
     Vector3 raycastOffset = new Vector3(0, 1.2f, 0);
     RaycastHit hit;
-    float raycastDistance = 6f;
+    float raycastDistance = 2f;
     
 	
     void Start()
@@ -19,24 +19,24 @@ public class ObstacleDetection : MonoBehaviour
         coll = GetComponent<BoxCollider>();
     }
 
-    void Update()
+    void LateUpdate()
     {
-        rb.constraints = rb.constraints | RigidbodyConstraints.FreezePositionZ;
+        pm.ObjectDetected = false;
         if (DetectObstacle(Vector3.forward) ||
             (pm.lane != Lane.Left && DetectObstacle(Vector3.left)) ||
             (pm.lane != Lane.Right && DetectObstacle(Vector3.right)))
         {
             if (hit.collider.CompareTag("Obstacle")) {
-                rb.constraints = rb.constraints & ~RigidbodyConstraints.FreezePositionZ;
+                pm.ObjectDetected = true;
             }
         }
     }
 
     bool DetectObstacle(Vector3 dir) {
         bool result = Physics.BoxCast(coll.bounds.center, coll.bounds.extents / 2f, dir, out hit, Quaternion.identity, raycastDistance);
-        Debug.DrawRay(transform.position + raycastOffset, transform.TransformDirection(dir) * raycastDistance, Color.white);
+        Debug.DrawRay(transform.position + raycastOffset, dir * raycastDistance, Color.white);
         if (result) {
-            Debug.DrawRay(transform.position + raycastOffset, transform.TransformDirection(dir) * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position + raycastOffset, dir * hit.distance, Color.yellow);
         }
         return result;
     }

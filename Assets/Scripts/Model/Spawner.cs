@@ -6,10 +6,13 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
     public GameObject coinPrefab;
     public List<GameObject> obstacles = new List<GameObject>();
-    public float coinsRowSpawnRate = 1f;
+    public List<GameObject> scenarios = new List<GameObject>();
     public int coinsInRow = 5;
+    public float coinsRowSpawnRate = 1f;
     public float coinsInRowSpawnRate = 1f;
     public float obstacleSpawnRate = 1f;
+    public float scenarioSpawnRate = 1f;
+    public float obstacleVelocityFactor = 1f;
 
 
     GameManager gameManager;
@@ -22,7 +25,8 @@ public class Spawner : MonoBehaviour {
 
     void Start() {
         StartCoroutine(SpawnCoins());
-        StartCoroutine(SpawnObstacles());
+        //StartCoroutine(SpawnScenarios());
+        //StartCoroutine(RandomSpawn());
     }
 
     IEnumerator SpawnCoins() {
@@ -45,7 +49,16 @@ public class Spawner : MonoBehaviour {
         }
     }
 
-    IEnumerator SpawnObstacles() {
+    IEnumerator SpawnScenarios() {
+        while (true) {
+            GameObject obj = Instantiate(scenarios[Random.Range(0, scenarios.Count)], transform);
+            Scenario scenario = obj.AddComponent<Scenario>();
+            scenario.gm = gameManager;
+            yield return new WaitForSeconds(scenarioSpawnRate);
+        }
+    }
+
+    IEnumerator RandomSpawn() {
         while (true) {
             Vector3 lane = Random.Range(-1, 2) * Vector3.right * gameManager.laneOffset;
             GameObject obj = Instantiate(obstacles[Random.Range(0, obstacles.Count)], transform);

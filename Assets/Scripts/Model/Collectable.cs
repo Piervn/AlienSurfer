@@ -14,7 +14,6 @@ public class Collectable : MonoBehaviour
     public GameManager gm;
     public AudioManager am;
     
-
     void Update()
     {
         if (transform.position.z < -10) {

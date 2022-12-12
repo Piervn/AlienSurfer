@@ -6,12 +6,13 @@ public class GameManager : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI scoreText;
     public float gravityFactor = 1f;
-    public float laneOffset = 5f;
     public float environmentSpeed = 1f;
+    public float torpedoSpeed = 2f;
+    public float locomotiveSpeed = 4f;
     public float gameOverDelay = 0.4f;
 
-    [HideInInspector]
-    public int score = 0;
+    [HideInInspector] public int score = 0;
+    [HideInInspector] public float laneOffset = 4f;
 
     const float gravity = 9.81f;
 

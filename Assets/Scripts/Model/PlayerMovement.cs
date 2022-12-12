@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour {
 
     [HideInInspector]
     public Lane lane = Lane.Middle;
+    public bool ObjectDetected { get; set; } = false;
 
     Rigidbody rb;
     GameManager gm;
@@ -38,7 +39,7 @@ public class PlayerMovement : MonoBehaviour {
 
     bool IsFalling {
         get {
-            return rb.velocity.y < -0.1f;
+            return rb.velocity.y < -0.2f;
         }
     }
     bool IsRolling { get; set; } = false;
@@ -61,7 +62,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Obstacle") && (rb.constraints & RigidbodyConstraints.FreezePositionZ) == 0) {
+        if (collision.gameObject.CompareTag("Obstacle") && ObjectDetected) {
             gm.environmentSpeed = 0;
             interrupted = true;
             EventManager.GameOver();
@@ -71,7 +72,6 @@ public class PlayerMovement : MonoBehaviour {
     public bool IsGrounded() {
         bool isGrounded = Physics.BoxCast(coll.bounds.center, coll.bounds.extents / 2f, Vector3.down, 
                                           Quaternion.identity, distToGround, groundLayer);
-
         return isGrounded;
     }
 
@@ -133,8 +133,6 @@ public class PlayerMovement : MonoBehaviour {
 
     public void Slide() {
         if (state == State.Run) {
-            coll.size = new Vector3(1f, 0.5f, 1f);
-            coll.center = new Vector3(0f, 0.25f, 0f);
             state = State.Slide;
         }
     }
@@ -143,12 +141,16 @@ public class PlayerMovement : MonoBehaviour {
         if (state == State.Jump || state == State.Fall) {
             rb.AddForce(Vector3.down * rollDownVelocity);
             IsRolling = true;
-            coll.size = new Vector3(1f, 0.5f, 1f);
-            coll.center = new Vector3(0f, 0.25f, 0f);
         }
     }
 
+
     // Handler for the animation event
+    public void GetDown() {
+        coll.size = new Vector3(1f, 0.5f, 1f);
+        coll.center = new Vector3(0f, 0.25f, 0f);
+    }
+    
     public void EndSliding() {
         state = State.Run;
         IsRolling = false;
