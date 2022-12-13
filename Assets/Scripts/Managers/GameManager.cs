@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI scoreText;
+    public bool IsGameOver { get; set; } = false;
     public float gravityFactor = 1f;
     public float environmentSpeed = 1f;
     public float torpedoSpeed = 2f;
@@ -19,7 +20,6 @@ public class GameManager : MonoBehaviour
     GameObject player;
     Animator gameOverPopup;
     Vector3 defaultGravity;
-    bool gameOver = false;
     
     void Awake() {
         player = GameObject.Find("Player");
@@ -27,9 +27,7 @@ public class GameManager : MonoBehaviour
     }
 
     void Start() {
-        EventManager.OnCoinCollect += () => {
-            scoreText.text = (++score).ToString();
-        };
+        
         EventManager.OnGameOver += () => {
             StartCoroutine(GameOver(gameOverDelay));
         };
@@ -39,14 +37,11 @@ public class GameManager : MonoBehaviour
 
     void Update() {
         Physics.gravity = Vector3.down * gravity * gravityFactor;
-        if (!gameOver && player.transform.position.z < -10) {
-            EventManager.GameOver();
-        }
     }
 
     IEnumerator GameOver(float delay = 0f) {
         yield return new WaitForSeconds(delay);
-        gameOver = true;
+        IsGameOver = true;
         gameOverPopup.SetTrigger("GameOver");
         environmentSpeed = 0f;
     }

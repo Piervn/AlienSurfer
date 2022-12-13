@@ -44,13 +44,14 @@ public class Spawner : MonoBehaviour {
             obj.transform.position += lane;
 
             Collectable coin = obj.AddComponent<Collectable>();
+            coin.type = CollectableType.Coin;
             coin.gm = gameManager;
             coin.am = audioManager;
         }
     }
 
     IEnumerator SpawnScenarios() {
-        while (true) {
+        while (!gameManager.IsGameOver) {
             GameObject obj = Instantiate(scenarios[Random.Range(0, scenarios.Count)], transform);
             Scenario scenario = obj.AddComponent<Scenario>();
             scenario.gm = gameManager;

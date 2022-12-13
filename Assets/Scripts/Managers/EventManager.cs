@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class EventManager {
-    public delegate void CoinAction();
-    public static event CoinAction OnCoinCollect;
+    public delegate void CollectableAction();
+    public static event CollectableAction OnCoinCollect;
+    public static event CollectableAction OnMagnetCollect;
+    public static event CollectableAction OnJumpBootsCollect;
+    public static event CollectableAction OnJetpackCollect;
 
     public delegate void KeyAction();
     public static event KeyAction OnSpacePress;
@@ -25,6 +28,18 @@ public class EventManager {
 
     public static void CollectCoin() {
         OnCoinCollect?.Invoke();
+    }
+
+    public static void CollectMagnet() {
+        OnMagnetCollect?.Invoke();
+    }
+
+    public static void CollectJumpBoots() {
+        OnJumpBootsCollect?.Invoke();
+    }
+
+    public static void CollectJetpack() {
+        OnJetpackCollect?.Invoke();
     }
 
     public static void SpacePress() {
@@ -57,6 +72,9 @@ public class EventManager {
 
     public static void ClearEvents() {
         OnCoinCollect = null;
+        OnMagnetCollect = null;
+        OnJumpBootsCollect = null;
+        OnJetpackCollect = null;
         OnSpacePress = null;
         OnLeftPress = null;
         OnRightPress = null;
