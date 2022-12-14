@@ -128,7 +128,9 @@ public class PlayerMovement : MonoBehaviour {
                                                      sideMovementVelocity * Time.deltaTime);
             yield return null;
         }
-        state = prevState;
+        if (state == State.Sideways) {
+            state = prevState;
+        }
         lane = targetLane;
     }
 

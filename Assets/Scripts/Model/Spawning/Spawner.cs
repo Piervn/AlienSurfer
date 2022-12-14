@@ -15,6 +15,7 @@ public class Spawner : MonoBehaviour {
     public float scenarioSpawnRate = 1f;
     public float obstacleVelocityFactor = 1f;
 
+    float raycastSourceOffset = 20f;
 
     GameManager gameManager;
     AudioManager audioManager;
@@ -25,11 +26,15 @@ public class Spawner : MonoBehaviour {
     }
 
     void Start() {
-        //StartCoroutine(SpawnCoins());
+        StartCoroutine(SpawnCoins());
         StartCoroutine(SpawnBonuses());
         //StartCoroutine(SpawnScenarios());
         //StartCoroutine(RandomSpawn());
     }
+    void Update() {
+        GetSpawnPosition(Vector3.zero);
+    }
+
 
     IEnumerator SpawnCoins() {
         while (true) {
@@ -53,10 +58,9 @@ public class Spawner : MonoBehaviour {
     }
 
     IEnumerator SpawnBonuses() {
-        while (true) {
+        while (!gameManager.IsGameOver) {
             Vector3 lane = Random.Range(-1, 2) * Vector3.right * gameManager.laneOffset;
-            GameObject obj = Instantiate(bonuses[Random.Range(0, bonuses.Count)], transform);
-            obj.transform.position += lane;
+            GameObject obj = Instantiate(bonuses[Random.Range(0, bonuses.Count)], GetSpawnPosition(lane), Quaternion.identity, transform);
 
             Collectable bonus = obj.AddComponent<Collectable>();
             switch (obj.tag) {
@@ -72,7 +76,7 @@ public class Spawner : MonoBehaviour {
             }
             bonus.gm = gameManager;
             bonus.am = audioManager;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(Random.Range(5, 10));
         }
     }
 
@@ -86,7 +90,7 @@ public class Spawner : MonoBehaviour {
     }
 
     IEnumerator RandomSpawn() {
-        while (true) {
+        while (!gameManager.IsGameOver) {
             Vector3 lane = Random.Range(-1, 2) * Vector3.right * gameManager.laneOffset;
             GameObject obj = Instantiate(obstacles[Random.Range(0, obstacles.Count)], transform);
             obj.transform.position += lane;
@@ -98,6 +102,16 @@ public class Spawner : MonoBehaviour {
             obst.gm = gameManager;
             yield return new WaitForSeconds(obstacleSpawnRate);
         }
+    }
+
+    Vector3 GetSpawnPosition(Vector3 lane) {
+        RaycastHit hit;
+        bool result = Physics.Raycast(transform.position + (Vector3.up * raycastSourceOffset) + lane, Vector3.down, out hit, 100);
+        //Debug.DrawRay(transform.position + (Vector3.up * raycastSourceOffset) + lane, Vector3.down * 100, Color.red);
+        if (result) {
+            //Debug.DrawRay(transform.position + (Vector3.up * raycastSourceOffset) + lane, Vector3.down * hit.distance, Color.yellow);
+        }
+        return hit.point;
     }
     
 }

@@ -34,9 +34,9 @@ public class ObstacleDetection : MonoBehaviour
 
     bool DetectObstacle(Vector3 dir) {
         bool result = Physics.BoxCast(coll.bounds.center, coll.bounds.extents / 2f, dir, out hit, Quaternion.identity, raycastDistance);
-        Debug.DrawRay(transform.position + raycastOffset, dir * raycastDistance, Color.white);
+        //Debug.DrawRay(transform.position + raycastOffset, dir * raycastDistance, Color.white);
         if (result) {
-            Debug.DrawRay(transform.position + raycastOffset, dir * hit.distance, Color.yellow);
+            //Debug.DrawRay(transform.position + raycastOffset, dir * hit.distance, Color.yellow);
         }
         return result;
     }

@@ -7,8 +7,8 @@ public class JumpBoots : MonoBehaviour
     GameManager gm;
     TimeBar tb;
     PlayerMovement pm;
-    float extraJumpForce = 8f;
-    float timeToLive = 15f;
+    float extraJumpForce = 6f;
+    float timeToLive = 5f;
 
     void Start()
     {

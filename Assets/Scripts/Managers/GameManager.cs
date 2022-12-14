@@ -10,11 +10,11 @@ public class GameManager : MonoBehaviour
     public float gravityFactor = 1f;
     public float environmentSpeed = 1f;
     public float torpedoSpeed = 2f;
-    public float locomotiveSpeed = 4f;
+    public float locomotiveSpeed = 2f;
     public float gameOverDelay = 0.4f;
-    public float distance = 0f;
 
     [HideInInspector] public int score = 0;
+    [HideInInspector] float distance = 0f;
     [HideInInspector] public float laneOffset = 4f;
 
     const float gravity = 9.81f;

@@ -2270,6 +2270,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2108817000619402743, guid: 653266aeaf230214ebc8c2617c2b1aae, type: 3}
     - {fileID: 7751345285081884420, guid: 653266aeaf230214ebc8c2617c2b1aae, type: 3}
+    - {fileID: 4383959750612151437, guid: 653266aeaf230214ebc8c2617c2b1aae, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 653266aeaf230214ebc8c2617c2b1aae, type: 3}
 --- !u!1 &660827766
 GameObject:
@@ -3560,11 +3561,10 @@ MonoBehaviour:
   scoreText: {fileID: 948014205}
   distanceText: {fileID: 1094051628}
   gravityFactor: 2
-  environmentSpeed: 8
+  environmentSpeed: 10
   torpedoSpeed: 2
-  locomotiveSpeed: 6
+  locomotiveSpeed: 2
   gameOverDelay: 0.4
-  distance: 0
   score: 0
   laneOffset: 4
 --- !u!1 &1050430008
@@ -3811,6 +3811,8 @@ MonoBehaviour:
   - {fileID: 7988604816653508788, guid: 64abe72933ca2984b98a19d21e2f77a4, type: 3}
   bonuses:
   - {fileID: 3084541802692416175, guid: 62d41dde6dd111545b7b89568ed6eae9, type: 3}
+  - {fileID: 7265768404162535203, guid: 653266aeaf230214ebc8c2617c2b1aae, type: 3}
+  - {fileID: 9119944826804649508, guid: 6f1ad90a881972c4293e51a3c21f725d, type: 3}
   coinsInRow: 5
   coinsRowSpawnRate: 0.5
   coinsInRowSpawnRate: 2
@@ -4527,6 +4529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1608935301194692721, guid: 62d41dde6dd111545b7b89568ed6eae9, type: 3}
+    - {fileID: 1198312834872619057, guid: 62d41dde6dd111545b7b89568ed6eae9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 62d41dde6dd111545b7b89568ed6eae9, type: 3}
 --- !u!1 &1229976732 stripped
 GameObject:
@@ -5025,7 +5028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.029955864, a: 1}
+  m_Color: {r: 0.6981132, g: 0, b: 0.021901589, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5539,6 +5542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9119944826804649507, guid: 6f1ad90a881972c4293e51a3c21f725d, type: 3}
+    - {fileID: 5788203211950533556, guid: 6f1ad90a881972c4293e51a3c21f725d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6f1ad90a881972c4293e51a3c21f725d, type: 3}
 --- !u!1001 &1540789243
 PrefabInstance:

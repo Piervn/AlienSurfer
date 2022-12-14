@@ -7,7 +7,7 @@ public class Jetpack : MonoBehaviour
     GameManager gm;
     TimeBar tb;
     Rigidbody rb;
-    float timeToLive = 4f;
+    float timeToLive = 5f;
     float height = 10f;
     float upVelocity = 5f;
     float speed = 4f;
@@ -26,7 +26,6 @@ public class Jetpack : MonoBehaviour
         timeToLive -= Time.deltaTime;
         tb.SetTime(timeToLive);
         if (timeToLive <= 0) {
-            EndFlying();
             Destroy(this);
         }
     }
@@ -48,5 +47,9 @@ public class Jetpack : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    void OnDestroy() {
+        EndFlying();
     }
 }

@@ -8,7 +8,7 @@ public class Magnet : MonoBehaviour
     TimeBar tb;
     float radius = 10f;
     float forceFactor = 1.5f;
-    float timeToLive = 15f;
+    float timeToLive = 5f;
     Vector3 offset = new Vector3(0, 1, 0);
 
     void Start() {
