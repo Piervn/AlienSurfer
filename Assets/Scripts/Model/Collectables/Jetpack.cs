@@ -7,7 +7,7 @@ public class Jetpack : MonoBehaviour
     GameManager gm;
     TimeBar tb;
     Rigidbody rb;
-    float timeToLive = 10f;
+    float timeToLive = 4f;
     float height = 10f;
     float upVelocity = 5f;
     float speed = 4f;

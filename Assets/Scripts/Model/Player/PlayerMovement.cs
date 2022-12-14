@@ -120,6 +120,7 @@ public class PlayerMovement : MonoBehaviour {
                 targetX = gm.laneOffset;
                 break;
         }
+        State prevState = state;
         state = State.Sideways;
         while (Mathf.Abs(transform.position.x - targetX) > 0.01f && !interrupted) {
             transform.position = Vector3.MoveTowards(transform.position, 
@@ -127,7 +128,7 @@ public class PlayerMovement : MonoBehaviour {
                                                      sideMovementVelocity * Time.deltaTime);
             yield return null;
         }
-        state = State.Run;
+        state = prevState;
         lane = targetLane;
     }
 
@@ -138,8 +139,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void RollDown() {
-        if (state == State.Jump || state == State.Fall) {
-            rb.AddForce(Vector3.down * rollDownVelocity);
+        if ((state == State.Jump || state == State.Fall) && !IsRolling) {
+            rb.velocity = Vector3.zero;
+            rb.AddForce(Vector3.down * rollDownVelocity, ForceMode.Impulse);
             IsRolling = true;
         }
     }

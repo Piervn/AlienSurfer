@@ -7,7 +7,7 @@ public class JumpBoots : MonoBehaviour
     GameManager gm;
     TimeBar tb;
     PlayerMovement pm;
-    float extraJumpForce = 10f;
+    float extraJumpForce = 8f;
     float timeToLive = 15f;
 
     void Start()
@@ -23,7 +23,6 @@ public class JumpBoots : MonoBehaviour
         timeToLive -= Time.deltaTime;
         tb.SetTime(timeToLive);
         if (timeToLive <= 0) {
-            DecreaseJumpForce();
             Destroy(this);
         }
     }
@@ -34,5 +33,9 @@ public class JumpBoots : MonoBehaviour
 
     void DecreaseJumpForce() {
         pm.jumpVelocity -= extraJumpForce;
+    }
+
+    void OnDestroy() {
+        DecreaseJumpForce();
     }
 }

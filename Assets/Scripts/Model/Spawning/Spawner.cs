@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour {
     public GameObject coinPrefab;
     public List<GameObject> obstacles = new List<GameObject>();
     public List<GameObject> scenarios = new List<GameObject>();
+    public List<GameObject> bonuses = new List<GameObject>();
     public int coinsInRow = 5;
     public float coinsRowSpawnRate = 1f;
     public float coinsInRowSpawnRate = 1f;
@@ -24,7 +25,8 @@ public class Spawner : MonoBehaviour {
     }
 
     void Start() {
-        StartCoroutine(SpawnCoins());
+        //StartCoroutine(SpawnCoins());
+        StartCoroutine(SpawnBonuses());
         //StartCoroutine(SpawnScenarios());
         //StartCoroutine(RandomSpawn());
     }
@@ -47,6 +49,30 @@ public class Spawner : MonoBehaviour {
             coin.type = CollectableType.Coin;
             coin.gm = gameManager;
             coin.am = audioManager;
+        }
+    }
+
+    IEnumerator SpawnBonuses() {
+        while (true) {
+            Vector3 lane = Random.Range(-1, 2) * Vector3.right * gameManager.laneOffset;
+            GameObject obj = Instantiate(bonuses[Random.Range(0, bonuses.Count)], transform);
+            obj.transform.position += lane;
+
+            Collectable bonus = obj.AddComponent<Collectable>();
+            switch (obj.tag) {
+                case "Magnet":
+                    bonus.type = CollectableType.Magnet;
+                    break;
+                case "JumpBoots":
+                    bonus.type = CollectableType.JumpBoots;
+                    break;
+                case "Jetpack":
+                    bonus.type = CollectableType.Jetpack;
+                    break;
+            }
+            bonus.gm = gameManager;
+            bonus.am = audioManager;
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

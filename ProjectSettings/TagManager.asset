@@ -10,6 +10,9 @@ TagManager:
   - Obstacle
   - Slope
   - Coin
+  - Jetpack
+  - JumpBoots
+  - Magnet
   layers:
   - Default
   - TransparentFX
