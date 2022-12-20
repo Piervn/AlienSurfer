@@ -41,4 +41,6 @@ public class Collectable : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    
 }

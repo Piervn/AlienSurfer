@@ -1425,10 +1425,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - name: Ambient
+    clip: {fileID: 8300000, guid: d0813d286f45db244b9a779767a94ba6, type: 3}
+    volume: 0
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
   - name: CoinCollected
     clip: {fileID: 8300000, guid: fff52766fd2d2d54491f789a835dad39, type: 3}
     volume: 0
     pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BonusCollected
+    clip: {fileID: 8300000, guid: 173c7fe959d5a5e429b98235dc46547a, type: 3}
+    volume: 0
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
 --- !u!4 &416441332
 Transform:
@@ -2365,6 +2378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
+  - component: {fileID: 705507996}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2383,8 +2397,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.9575472, b: 0.7877358, a: 1}
+  m_Intensity: 0.7
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2396,7 +2410,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 2.29
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -2423,7 +2437,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2442,13 +2456,33 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.35024813, y: -0.13662097, z: 0.051720157, w: 0.92519516}
-  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalPosition: {x: 0.14711414, y: 8.449841, z: -0.48726362}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 41.47, y: -16.8, z: 0}
+--- !u!114 &705507996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705507993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &707750829
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,6 +3207,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3204,7 +3239,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 17.137774
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -3212,8 +3247,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 70
+  far clip plane: 139.24
+  field of view: 70.00001
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3261,6 +3296,40 @@ MonoBehaviour:
   offsetY: 4.5
   offsetZ: -6
   smoothness: 0.106
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras:
+  - {fileID: 1176072878}
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1011559149
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,6 +3629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 948014205}
   distanceText: {fileID: 1094051628}
+  spawner: {fileID: 0}
   gravityFactor: 2
   environmentSpeed: 10
   torpedoSpeed: 2
@@ -3808,7 +3878,8 @@ MonoBehaviour:
   - {fileID: 5582071133966626570, guid: 364322e38435f0c45bf7cbd88a8b3af9, type: 3}
   scenarios:
   - {fileID: 8427654417890641968, guid: 20628ac11cb5a7443858b6d46f0fbfd6, type: 3}
-  - {fileID: 7988604816653508788, guid: 64abe72933ca2984b98a19d21e2f77a4, type: 3}
+  - {fileID: 7988604816653508788, guid: 9352b89a563063248900fa4263e1121d, type: 3}
+  - {fileID: 7988604816653508788, guid: 34560879961325241a068325a1302e3e, type: 3}
   bonuses:
   - {fileID: 3084541802692416175, guid: 62d41dde6dd111545b7b89568ed6eae9, type: 3}
   - {fileID: 7265768404162535203, guid: 653266aeaf230214ebc8c2617c2b1aae, type: 3}
@@ -3817,7 +3888,7 @@ MonoBehaviour:
   coinsRowSpawnRate: 0.5
   coinsInRowSpawnRate: 2
   obstacleSpawnRate: 2
-  scenarioSpawnRate: 10
+  scenarioSpawnRate: 1
   obstacleVelocityFactor: 1
 --- !u!4 &1052914080
 Transform:
@@ -4383,6 +4454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1176072879}
   - component: {fileID: 1176072878}
+  - component: {fileID: 1176072880}
   m_Layer: 0
   m_Name: UICamera
   m_TagString: Untagged
@@ -4448,6 +4520,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1176072880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176072876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 1
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1001 &1187892720
 PrefabInstance:
   m_ObjectHideFlags: 0

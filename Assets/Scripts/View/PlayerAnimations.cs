@@ -11,7 +11,7 @@ public class PlayerAnimations : MonoBehaviour
 
     const float animJumpSpeedFactor = 3.8f;
     const float animRunSpeedFactor = 6f;
-    const float animSideSpeedFactor = 10f;
+    const float animSideSpeedFactor = 6f;
 
     void Start()
     {
@@ -81,5 +81,10 @@ public class PlayerAnimations : MonoBehaviour
 
     public void EndSlideAnimation() {
         anim.SetBool("Sliding", false);
+    }
+
+    public void FlyAnimation() {
+        anim.SetBool("Falling", false);
+        anim.Play("Flying"); 
     }
 }

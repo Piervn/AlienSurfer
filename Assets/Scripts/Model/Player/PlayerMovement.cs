@@ -9,6 +9,7 @@ public enum State {
     Sideways,
     Slide,
     Fall,
+    Fly,
 }
 
 public enum Lane {
@@ -96,13 +97,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void MoveRight() {
-        if ((state == State.Run || state == State.Jump || state == State.Fall) && lane != Lane.Right) {
+        if (state != State.Slide && state != State.Sideways && lane != Lane.Right) {
             StartCoroutine(MoveToLane(lane + 1));
         }
     }
 
     public void MoveLeft() {
-        if ((state == State.Run || state == State.Jump || state == State.Fall) && lane != Lane.Left) {
+        if (state != State.Slide && state != State.Sideways && lane != Lane.Left) {
             StartCoroutine(MoveToLane(lane - 1));
         }
     }

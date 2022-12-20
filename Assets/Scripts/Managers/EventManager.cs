@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class EventManager {
     public delegate void CollectableAction();
     public static event CollectableAction OnCoinCollect;
+    public static event CollectableAction OnBonusCollect;
     public static event CollectableAction OnMagnetCollect;
     public static event CollectableAction OnJumpBootsCollect;
     public static event CollectableAction OnJetpackCollect;
@@ -28,6 +29,10 @@ public class EventManager {
 
     public static void CollectCoin() {
         OnCoinCollect?.Invoke();
+    }
+
+    public static void CollectBonus() {
+        OnBonusCollect?.Invoke();
     }
 
     public static void CollectMagnet() {

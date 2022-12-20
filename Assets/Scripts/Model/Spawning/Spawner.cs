@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour {
     void Start() {
         StartCoroutine(SpawnCoins());
         StartCoroutine(SpawnBonuses());
-        //StartCoroutine(SpawnScenarios());
+        StartCoroutine(SpawnScenarios());
         //StartCoroutine(RandomSpawn());
     }
     void Update() {
@@ -76,16 +76,18 @@ public class Spawner : MonoBehaviour {
             }
             bonus.gm = gameManager;
             bonus.am = audioManager;
-            yield return new WaitForSeconds(Random.Range(5, 10));
+            yield return new WaitForSeconds(Random.Range(1, 5));
         }
     }
 
     IEnumerator SpawnScenarios() {
         while (!gameManager.IsGameOver) {
             GameObject obj = Instantiate(scenarios[Random.Range(0, scenarios.Count)], transform);
+            float objDepth = obj.transform.GetChild(0).localPosition.z;
             Scenario scenario = obj.AddComponent<Scenario>();
             scenario.gm = gameManager;
-            yield return new WaitForSeconds(scenarioSpawnRate);
+            float timeOffset = objDepth / gameManager.environmentSpeed;
+            yield return new WaitForSeconds(timeOffset + scenarioSpawnRate);
         }
     }
 

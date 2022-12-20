@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI scoreText;
     public TMPro.TextMeshProUGUI distanceText;
+    public Spawner spawner;
     public bool IsGameOver { get; set; } = false;
     public float gravityFactor = 1f;
     public float environmentSpeed = 1f;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     
     void Awake() {
         player = GameObject.Find("Player");
+        spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
         gameOverPopup = GameObject.Find("GameOverPopup").GetComponent<Animator>();
     }
 

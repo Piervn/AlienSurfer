@@ -6,6 +6,7 @@ public class CollectableManager : MonoBehaviour
 {
     GameManager gm;
     PlayerMovement pm;
+    PlayerAnimations pa;
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
@@ -14,20 +15,22 @@ public class CollectableManager : MonoBehaviour
             gm.scoreText.text = (++gm.score).ToString();
         };
         EventManager.OnMagnetCollect += () => {
-            CollectingBonus(typeof(Magnet));
+            EventManager.CollectBonus();
+            gameObject.AddComponent<Magnet>();
         };
         EventManager.OnJumpBootsCollect += () => {
-            CollectingBonus(typeof(JumpBoots));
+            EventManager.CollectBonus();
+            if (gameObject.GetComponent<JumpBoots>()) {
+                Destroy(gameObject.GetComponent<JumpBoots>());
+            }
+            gameObject.AddComponent<JumpBoots>();
         };
         EventManager.OnJetpackCollect += () => {
-            CollectingBonus(typeof(Jetpack));
+            EventManager.CollectBonus();
+            if (gameObject.GetComponent<Jetpack>()) {
+                Destroy(gameObject.GetComponent<Jetpack>());
+            }
+            gameObject.AddComponent<Jetpack>();
         };
-    }
-
-    void CollectingBonus(System.Type bonus) {
-        if (gameObject.GetComponent(bonus)) {
-            Destroy(gameObject.GetComponent(bonus));
-        }
-        gameObject.AddComponent(bonus);
     }
 }
